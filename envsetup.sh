@@ -582,14 +582,14 @@ function gettop
 function make_release()
 {
     T=$(gettop)
-    export OTA_DISPLAY_ID=tg-endeavoru-jb$2
+    export OTA_REL_ID=tg-endeavoru-jb$2
     export BUILD_NUMBER=$1
     export OTA_BUILD_TIMESTAMP=`date "+%Y%m%d-%H%M"`
     if [ "$T" ]; then
 	# Remove the build.prop to make sure we regenerate it
 	rm $OUT/system/build.prop &> /dev/null
         make -C $T otapackage
-	echo "Display ID: $OTA_DISPLAY_ID"
+	echo "Release ID: $OTA_REL_ID"
 	echo "Build number: $BUILD_NUMBER"
 	echo "Timestamp: $OTA_BUILD_TIMESTAMP"
     else
