@@ -585,8 +585,12 @@ function make_release()
     if [ "$T" ]; then
 	# Remove the build.prop to make sure we regenerate it
 	rm $OUT/system/build.prop &> /dev/null
-        (cd $T; OTA_REL_ID=tg-endeavoru-jb$2 BUILD_NUMBER=$1 OTA_BUILD_TIMESTAMP=`date "+%Y%m%d-%H%M"` \
-		make -C $T otapackage)
+	BUILD_NUMBER=$1
+	OTA_REL_ID=tg-endeavoru-jb$2
+	OTA_BUILD_TIMESTAMP=`date "+%Y%m%d-%H%M"`
+	shift 2
+        (cd $T; OTA_REL_ID=$OTA_REL_ID BUILD_NUMBER=$BUILD_NUMBER OTA_BUILD_TIMESTAMP=$OTA_BUILD_TIMESTAMP \
+		make -C $T $@ otapackage)
 	echo "Release ID: $OTA_REL_ID"
 	echo "Build number: $BUILD_NUMBER"
 	echo "Timestamp: $OTA_BUILD_TIMESTAMP"
